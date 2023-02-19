@@ -1,20 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Game from './src/components/Game';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Game randomNumberCount={6} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#ffff',
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: '20%',
   },
 });
