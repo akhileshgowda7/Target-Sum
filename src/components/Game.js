@@ -1,57 +1,60 @@
 import { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TouchableHighlight,
-} from 'react-native';
-import RandomNumbers from './RandomNumbers';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Game(props) {
   const [selectedNumbers, selectNumber] = useState([]);
 
-  // useEffect(() => {
-  //   gameStatus();
-  // }, [selectedNumbers]);
+  useEffect(() => {
+    gameStatus();
+  }, [selectedNumbers]);
   const isNumberSelected = (numberIndex) => {
     return selectedNumbers.indexOf(numberIndex) >= 0;
   };
 
-  const randomNumbers = Array.from({ length: props.randomNumberCount }).map(
-    () => 1 + Math.floor(10 * Math.random())
-  );
-
   const gameStatus = () => {
     const numbers = [...selectedNumbers];
-    console.log(numbers);
     const sumSelected = numbers.reduce(
-      (acc, cur) => acc + randomNumbers[cur],
+      (acc, cur) => acc + props.randomNumbers[cur],
       0
     );
+    console.log(props.randomNumbers);
     console.log(sumSelected);
-    return sumSelected;
+
+    if (sumSelected == target) {
+      return true;
+    } else if (sumSelected > target) {
+      return 'lost';
+    }
+    // return sumSelected;
     // console.log(updatedNumbers);
   };
 
-  const target = randomNumbers
+  const target = props.randomNumbers
     .slice(0, props.randomNumberCount - 2)
     .reduce((acc, cur) => acc + cur, 0);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        gameStatus() && styles.win,
+        gameStatus() == 'lost' && styles.loose,
+      ]}
+    >
       <Text style={styles.target}>{target}</Text>
       <View style={styles.randomContainer}>
-        {randomNumbers.map((item, index) => (
+        {props.randomNumbers.map((item, index) => (
           <TouchableOpacity
             onPress={(e) => {
               e.preventDefault();
               let numbers = [...selectedNumbers, index];
               console.log(numbers);
               selectNumber(numbers);
+              // gameStatus();
             }}
           >
             <Text
+              key={index}
               id={index}
               style={[
                 styles.numbers,
@@ -98,5 +101,11 @@ const styles = StyleSheet.create({
   },
   selected: {
     opacity: 0.3,
+  },
+  win: {
+    backgroundColor: 'green',
+  },
+  loose: {
+    backgroundColor: 'red',
   },
 });
