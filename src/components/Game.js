@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import UrgeWithPleasureComponent from './UrgeWithPleasureComponent';
 
 export default function Game(props) {
   const [selectedNumbers, selectNumber] = useState([]);
@@ -28,6 +29,8 @@ export default function Game(props) {
     // return sumSelected;
     // console.log(updatedNumbers);
   };
+  let d = new Date();
+  d.setMinutes(d.getMinutes() + 30);
 
   const target = props.randomNumbers
     .slice(0, props.randomNumberCount - 2)
@@ -66,6 +69,7 @@ export default function Game(props) {
           </TouchableOpacity>
         ))}
       </View>
+      <UrgeWithPleasureComponent/>
     </View>
   );
 }
