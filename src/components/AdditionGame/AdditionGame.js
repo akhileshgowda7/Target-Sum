@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import UrgeWithPleasureComponent from './UrgeWithPleasureComponent';
 
-export default function Game(props) {
+export default function AdditionGame(props) {
   const [selectedNumbers, selectNumber] = useState([]);
 
   useEffect(() => {
