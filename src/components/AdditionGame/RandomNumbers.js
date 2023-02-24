@@ -1,41 +1,15 @@
 import { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function RandomNumbers(props) {
   const [selectedNumbers, selectNumber] = useState([]);
+
+  
 
   const isNumberSelected = (numberIndex) => {
     return selectedNumbers.indexOf(numberIndex) >= 0;
   };
 
-  // const handlePress = (numberIndex) => {
-  //   if (!isNumberSelected(numberIndex)) {
-  //     const updatedNumbers = [...selectedNumbers, numberIndex];
-  //     // console.log(updatedNumbers);
-  //     selectNumber(updatedNumbers);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // console.log(props.randomNumbers);
-  //   console.log(selectedNumbers);
-  // }, [selectedNumbers]);
-
-  // const gameStatus = () => {
-  //   const numbers = [...selectedNumbers];
-  //   console.log(numbers);
-  //   const sumSelected = numbers.reduce(
-  //     (acc, cur) => acc + props.randomNumbers[cur],
-  //     0
-  //   );
-  //   // console.log(updatedNumbers);
-  // };
   return (
     <TouchableOpacity
       onPress={() => {
