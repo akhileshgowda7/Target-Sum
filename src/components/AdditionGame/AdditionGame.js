@@ -1,25 +1,38 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Levels from './Levels';
 import UrgeWithPleasureComponent from './UrgeWithPleasureComponent';
 
 export default function AdditionGame(props) {
   const [selectedNumbers, selectNumber] = useState([]);
-  const [timer, endTimer] = useState(false);
+  const [result, setResult] = useState(false);
+  const [level, setLevel] = useState(0);
+
   useEffect(() => {
-    gameStatus();
+    let status = gameStatus();
+    if (status == true) {
+      let curLevel = level;
+      setLevel(curLevel + 1);
+      let curCount = props.randomNumberCount;
+      selectNumber([]);
+      props.setRandomCount(curCount + 1);
+    } else if (status == 'lost') {
+      setLevel(0);
+    }
   }, [selectedNumbers]);
+
   const isNumberSelected = (numberIndex) => {
     return selectedNumbers.indexOf(numberIndex) >= 0;
   };
 
   const gameStatus = () => {
-    let isExpired = timer;
+    let isExpired = result;
     const numbers = [...selectedNumbers];
     const sumSelected = numbers.reduce(
       (acc, cur) => acc + props.randomNumbers[cur],
       0
     );
-    console.log(props.randomNumbers);
+    // console.log(props.randomNumbers);
     console.log(sumSelected);
 
     if (sumSelected == target) {
@@ -46,6 +59,7 @@ export default function AdditionGame(props) {
       ]}
     >
       <Text style={styles.target}>{target}</Text>
+      <Levels curLevel={level} />
       <View style={styles.randomContainer}>
         {props.randomNumbers.map((item, index) => (
           <TouchableOpacity
@@ -69,7 +83,7 @@ export default function AdditionGame(props) {
           </TouchableOpacity>
         ))}
       </View>
-      <UrgeWithPleasureComponent timer={timer} endTimer={endTimer} />
+      <UrgeWithPleasureComponent timer={result} endTimer={setResult} />
     </View>
   );
 }
@@ -84,7 +98,8 @@ const styles = StyleSheet.create({
   target: {
     fontSize: 40,
     backgroundColor: '#bbb',
-    margin: 50,
+    marginTop: 50,
+    marginBottom: 20,
     textAlign: 'center',
     paddingHorizontal: 50,
   },
@@ -111,5 +126,9 @@ const styles = StyleSheet.create({
   },
   loose: {
     backgroundColor: 'red',
+  },
+  levels: {
+    textAlign: 'center',
+    marginBottom: '20px',
   },
 });
