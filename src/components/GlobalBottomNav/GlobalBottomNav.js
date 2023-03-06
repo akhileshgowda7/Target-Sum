@@ -4,6 +4,8 @@ import AdditionGame from '../AdditionGame/AdditionGame';
 
 const Add = () => {
   const [randomCount, setRandomCount] = React.useState(3);
+
+  
   let count = randomCount;
   const randomNumberCount = count;
   const randomNumbers = Array.from({ length: randomNumberCount }).map(

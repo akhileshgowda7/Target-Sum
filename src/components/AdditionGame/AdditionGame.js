@@ -7,17 +7,25 @@ export default function AdditionGame(props) {
   const [selectedNumbers, selectNumber] = useState([]);
   const [result, setResult] = useState(false);
   const [level, setLevel] = useState(0);
+  const [time, setTime] = useState(100);
+  const [stop, setStop] = useState(true);
 
   useEffect(() => {
     let status = gameStatus();
     if (status == true) {
       let curLevel = level;
+      let curTime = time;
       setLevel(curLevel + 1);
+      setTime(curTime - 10);
       let curCount = props.randomNumberCount;
       selectNumber([]);
       props.setRandomCount(curCount + 1);
-    } else if (status == 'lost') {
-      setLevel(0);
+    } else if (status == 'lost' ) {
+      setStop(false);
+    }
+
+    if (level == 0) {
+      props.setRandomCount(3);
     }
   }, [selectedNumbers]);
 
@@ -83,7 +91,15 @@ export default function AdditionGame(props) {
           </TouchableOpacity>
         ))}
       </View>
-      <UrgeWithPleasureComponent timer={result} endTimer={setResult} />
+      <UrgeWithPleasureComponent
+        timer={result}
+        endTimer={setResult}
+        time={time}
+        setStop={setStop}
+        stop={stop}
+        level={level}
+        setLevel={setLevel}
+      />
     </View>
   );
 }
