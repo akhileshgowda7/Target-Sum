@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
 import AdditionGame from "../AdditionGame/AdditionGame";
+import ChemistryGame from "../ChemistryGame/ChemistryGame";
 
 const Add = () => {
   const randomNumberCount = 6;
@@ -29,16 +30,16 @@ const GlobalBottomNav = () => {
       unfocusedIcon: "plus-outline",
     },
     {
-      key: "wip",
-      title: "WIP",
-      focusedIcon: "help",
-      unfocusedIcon: "help-box",
+      key: "chem",
+      title: "Chemistry Game",
+      focusedIcon: "flask-round-bottom-empty",
+      unfocusedIcon: "flask-round-bottom",
     },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     add: Add,
-    wip: WIP,
+    chem: ChemistryGame,
   });
 
   return (
