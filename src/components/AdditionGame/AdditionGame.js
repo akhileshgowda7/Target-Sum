@@ -20,7 +20,7 @@ export default function AdditionGame(props) {
       let curCount = props.randomNumberCount;
       selectNumber([]);
       props.setRandomCount(curCount + 1);
-    } else if (status == 'lost' ) {
+    } else if (status == 'lost') {
       setStop(false);
     }
 
