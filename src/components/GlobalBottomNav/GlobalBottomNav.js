@@ -1,9 +1,13 @@
-import * as React from "react";
-import { BottomNavigation, Text } from "react-native-paper";
-import AdditionGame from "../AdditionGame/AdditionGame";
+import * as React from 'react';
+import { BottomNavigation, Text } from 'react-native-paper';
+import AdditionGame from '../AdditionGame/AdditionGame';
 
 const Add = () => {
-  const randomNumberCount = 6;
+  const [randomCount, setRandomCount] = React.useState(3);
+
+  
+  let count = randomCount;
+  const randomNumberCount = count;
   const randomNumbers = Array.from({ length: randomNumberCount }).map(
     () => 1 + Math.floor(10 * Math.random())
   );
@@ -12,6 +16,7 @@ const Add = () => {
       <AdditionGame
         randomNumberCount={randomNumberCount}
         randomNumbers={randomNumbers}
+        setRandomCount={setRandomCount}
       />
     </>
   );
@@ -23,16 +28,16 @@ const GlobalBottomNav = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
-      key: "add",
-      title: "Addition Game",
-      focusedIcon: "plus-thick",
-      unfocusedIcon: "plus-outline",
+      key: 'add',
+      title: 'Addition Game',
+      focusedIcon: 'plus-thick',
+      unfocusedIcon: 'plus-outline',
     },
     {
-      key: "wip",
-      title: "WIP",
-      focusedIcon: "help",
-      unfocusedIcon: "help-box",
+      key: 'wip',
+      title: 'WIP',
+      focusedIcon: 'help',
+      unfocusedIcon: 'help-box',
     },
   ]);
 
