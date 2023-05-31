@@ -11,9 +11,10 @@ const UrgeWithPleasureComponent = (props) => (
       let timer = props.timer;
       timer = true;
       props.endTimer(timer);
-      let level = props.level;
-      level = 0;
-      props.setLevel(0);
+      alert(`Alert Game over your score is - ${props.level}`);
+      // let level = props.level;
+      // level = 0;
+      // props.setLevel(0);
       // return { shouldRepeat: true, delay: 1.5 }
     }}
   >
