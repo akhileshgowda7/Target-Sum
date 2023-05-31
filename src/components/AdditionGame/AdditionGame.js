@@ -4,7 +4,7 @@ import UrgeWithPleasureComponent from './UrgeWithPleasureComponent';
 
 export default function AdditionGame(props) {
   const [selectedNumbers, selectNumber] = useState([]);
-
+  const [timer, endTimer] = useState(false);
   useEffect(() => {
     gameStatus();
   }, [selectedNumbers]);
@@ -13,6 +13,7 @@ export default function AdditionGame(props) {
   };
 
   const gameStatus = () => {
+    let isExpired = timer;
     const numbers = [...selectedNumbers];
     const sumSelected = numbers.reduce(
       (acc, cur) => acc + props.randomNumbers[cur],
@@ -25,9 +26,9 @@ export default function AdditionGame(props) {
       return true;
     } else if (sumSelected > target) {
       return 'lost';
+    } else if (isExpired) {
+      return 'lost';
     }
-    // return sumSelected;
-    // console.log(updatedNumbers);
   };
   let d = new Date();
   d.setMinutes(d.getMinutes() + 30);
@@ -53,7 +54,6 @@ export default function AdditionGame(props) {
               let numbers = [...selectedNumbers, index];
               console.log(numbers);
               selectNumber(numbers);
-              // gameStatus();
             }}
           >
             <Text
@@ -69,7 +69,7 @@ export default function AdditionGame(props) {
           </TouchableOpacity>
         ))}
       </View>
-      <UrgeWithPleasureComponent/>
+      <UrgeWithPleasureComponent timer={timer} endTimer={endTimer} />
     </View>
   );
 }
